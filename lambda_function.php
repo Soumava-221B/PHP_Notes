@@ -30,7 +30,8 @@
         ]
     ];
 
-    function filterByAuthor($books, $author) {
+    // Varibale pointing to a function
+    $filterByAuthor = function ($books, $author) {  
         $fileteredBooks = [];
 
         foreach ($books as $book) {
@@ -40,25 +41,9 @@
         }
 
         return $fileteredBooks;
-    }                                          // Anynoumous function concluded with semicolon
+    };                                          // Anynoumous function concluded with semicolon
 
-
-    // function filterByYear($books, $year)
-    // {
-    //     $fileteredBooks = [];
-
-    //     foreach ($books as $book) {
-    //         if ($book['releaseYear'] === $year) {
-    //             $fileteredBooks[] = $book;
-    //         }
-    //     }
-
-    //     return $fileteredBooks;
-    // }
-
-    // return $fileteredBooks;
-
-        $fileteredBooks = filterByAuthor($books, 'Philip K. Dick');  // Extract variable
+        $fileteredBooks = $filterByAuthor($books, 'Philip K. Dick');  // Extract variable
      ?>
 
     <div>
