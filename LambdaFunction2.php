@@ -30,25 +30,37 @@
         ]
     ];
 
-    // Varibale pointing to a function
-    $filterByAuthor = function ($books, $author) {
-        $fileteredBooks = [];
+    function filter($items, $key, $value)
+    {
+        $fileteredItems = [];
 
-        foreach ($books as $book) {
-            if ($book['author'] === $author) {
-                $fileteredBooks[] = $book;
+        foreach ($items as $item) {
+            if ($item[$key] === $value) {
+                $fileteredItems[] = $item;
             }
         }
 
-        return $fileteredBooks;
-    };                                          // Anynoumous function concluded with semicolon
+        return $fileteredItems;
+    };
 
-    $fileteredBooks = $filterByAuthor($books, 'Philip K. Dick');  // Extract variable
+    $fileteredBooks = filter($books, 'author', 'Philip K. Dick');
+    $fileteredYear = filter(
+        $books,
+        'releaseYear',
+        2021
+    );
     ?>
 
     <div>
         <ul>
             <?php foreach ($fileteredBooks as $book): ?>
+                <li>
+                    <a href="<?= $book['purchaseUrl'] ?>">
+                        <?= $book['name'] ?> (<?= $book['releaseYear'] ?>) - By <?= $book['author'] ?>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+            <?php foreach ($fileteredYear as $book): ?>
                 <li>
                     <a href="<?= $book['purchaseUrl'] ?>">
                         <?= $book['name'] ?> (<?= $book['releaseYear'] ?>) - By <?= $book['author'] ?>
