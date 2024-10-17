@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Arrays</title>
+    <title>Lambda Function</title>
 </head>
 
 <body>
@@ -30,8 +30,7 @@
         ]
     ];
 
-    function filterByAuthor($books, $author)
-    {
+    function filterByAuthor($books, $author) {
         $fileteredBooks = [];
 
         foreach ($books as $book) {
@@ -41,26 +40,30 @@
         }
 
         return $fileteredBooks;
-    }
-    ?>
+    }                                          // Anynoumous function concluded with semicolon
 
-    <!-- without the filter function -->
-    <ul>
-        <?php foreach ($books as $book): ?>
-            <?php if ($book['author'] === 'Andy Weir') : ?>
-                <li>
-                    <a href="<?= $book['purchaseUrl'] ?>">
-                        <?= $book['name'] ?> (<?= $book['releaseYear'] ?>) - By <?= $book['author'] ?>
-                    </a>
-                </li>
-            <?php endif; ?>
-        <?php endforeach; ?>
-    </ul>
 
-    <!-- with the filter function -->
+    // function filterByYear($books, $year)
+    // {
+    //     $fileteredBooks = [];
+
+    //     foreach ($books as $book) {
+    //         if ($book['releaseYear'] === $year) {
+    //             $fileteredBooks[] = $book;
+    //         }
+    //     }
+
+    //     return $fileteredBooks;
+    // }
+
+    // return $fileteredBooks;
+
+        $fileteredBooks = filterByAuthor($books, 'Philip K. Dick');  // Extract variable
+     ?>
+
     <div>
         <ul>
-            <?php foreach (filterByAuthor($books, 'Philip K. Dick') as $book): ?>
+            <?php foreach ($fileteredBooks as $book): ?>
                 <li>
                     <a href="<?= $book['purchaseUrl'] ?>">
                         <?= $book['name'] ?> (<?= $book['releaseYear'] ?>) - By <?= $book['author'] ?>
