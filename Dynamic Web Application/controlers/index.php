@@ -1,12 +1,10 @@
 <?php
 
-require "functions.php";
-
 $heading = "Home";
 
 // echo $_SERVER['REQUEST_URI'];
 
-// dd($_SERVER);
+// dd($_SERVER); (die and dump usualy used in laravel)
 
 // if ($_SERVER['REQUEST_URI'] === '/') {
 //     echo 'bg-gray-900 text-white';
