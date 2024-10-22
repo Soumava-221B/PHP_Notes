@@ -1,50 +1,22 @@
 <?php
 
 require 'functions.php';
+require 'views/Database.php';
 // require 'router.php';
 
+$config = require('views/config.php');
 
-// class Person {
-//     public $name;
-//     public $age;
-    
-//     public function breath() {
-//         echo $this -> name . ' is breathing!';
-//     }
-// }
+$db = new Database($config['database']);
 
-// $person = new Person();
+$id = $_GET['id'];
+// when accepting user input through query string or form never inline it as a part of the sql query because if you do that it will create an SQL injection Vulnerabilities 
 
-// $person -> name = 'John Doe';
-// $person -> age = 25;
+// $query = "SELECT * FROM posts WHERE id = {$id}";  
+// insted you can replace it with an ?
+$query = "SELECT * FROM posts WHERE id = ?";
 
-// dd($person -> name);
-// $person -> breath();
+// var_dump($query);
 
+$posts = $db->query($query, [$id])->fetch();
 
-// connect to our MySQL database.
-$dsn = "mysql:host=localhost;port=3306;dbname=myapp;charset=utf8mb4";
-
-$username = 'root';
-$password = 'test123';
-
-// pdo instant
-$pdo = new PDO($dsn, $username, $password);
-
-// try {
-//     $pdo = new PDO($dsn, $username, $password);
-//     // Set the PDO error mode to exception
-//     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//     echo "Connected successfully";
-// } catch (PDOException $e) {
-//     echo "Connection failed: " . $e->getMessage();
-// }
-
-$statement = $pdo -> prepare("SELECT * FROM posts");
-$statement -> execute();
-
-$posts = $statement -> fetchAll(PDO::FETCH_ASSOC);
-
-foreach ($posts as $post) {
-    echo "<li>" . $post['title'] . "</li>";
-}
+var_dump($posts);
