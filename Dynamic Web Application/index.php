@@ -2,6 +2,7 @@
 
 require 'functions.php';
 require 'views/Database.php';
+require 'views/Response.php';
 require 'router.php';
 
 
