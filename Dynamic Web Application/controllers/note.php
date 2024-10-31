@@ -6,15 +6,13 @@ $db = new Database($config['database']);
 $heading = 'Note';
 $currentUserId = 1;
 
-$note = $db->query('SELECT * FROM notes WHERE id = :id', ['id' => $_GET['id']])->fetch();
+$note = $db->query('SELECT * FROM notes WHERE id = :id', ['id' => $_GET['id']])->findOrFail();
 
-if(! $note) {
-    abort();
-}
+authorize($note['user_id'] === $currentUserId);
 
-if($note['user_id'] !== $currentUserId) {
-    abort(Response::FORBIDDEN);
-}
+// if($note['user_id'] !== $currentUserId) {
+//     abort(Response::FORBIDDEN);
+// }
 
 
 require "views/note.views.php";
