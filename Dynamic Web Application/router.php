@@ -1,14 +1,8 @@
 <?php
 
-$uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 
-$routes = [
-'/' => 'controllers/index.php',
-'/about' => 'controllers/about.php',
-'/notes' => 'controllers/notes.php',
-'/note' => 'controllers/note.php',
-'/contact' => 'controllers/contact.php'
-];
+$routes = require('routes.php');
+
 
 // To handle the routes
 function routeToController($uri, $routes) {
@@ -29,4 +23,5 @@ require "views/{$code}.php";
 die();
 }
 
+$uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 routeToController($uri, $routes);
