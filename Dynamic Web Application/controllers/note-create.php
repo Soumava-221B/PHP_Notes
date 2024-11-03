@@ -1,20 +1,23 @@
 <?php
 
+require ('Validator.php');
+
 $config = require('views/config.php');
 $db = new Database($config['database']);
 
 $heading = 'Create Note';
 
+
+// if (! Validator::email('gsdfgasdfg')) {
+//     dd('that is not a valid email');
+// }
+
 // Server Side validation
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = [];
 
-    if (strlen($_POST['body']) === 0) {
-        $errors['body'] = 'A body is required';
-    }
-
-    if (strlen($_POST['body']) > 1000) {
-        $errors['body'] = 'The body can not be more than 1,000 characters.';
+    if (! Validator::string($_POST['body'], 1, 1000)) {
+        $errors['body'] = 'A body of no more than 1,000 characters is required';
     }
 
     if(empty($errors)) {
