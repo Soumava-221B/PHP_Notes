@@ -1,0 +1,3 @@
+/*
+Write a PHP program that reads data from a file and throws a custom exception if the file does not exist.
+*/
